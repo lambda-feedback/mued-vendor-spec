@@ -1,0 +1,44 @@
+type: object
+description: >
+  Lambda Feedback's evaluation-function configuration, namespaced under
+  `configuration.vendorExtensions.x-lf` on an Evaluate request. All fields
+  are evaluation-function-defined and vary by grading function in use;
+  none are standardized across LF evaluation functions.
+additionalProperties: true
+properties:
+  gradeParams:
+    type:
+      - object
+      - "null"
+    description: >
+      Arbitrary per-response-area grading configuration. Shape is entirely
+      defined by the evaluation function selected for this response area;
+      µEd-api and this schema make no assumptions about its contents.
+    additionalProperties: true
+  cases:
+    type:
+      - array
+      - "null"
+    description: Optional list of grading cases evaluated against the submission.
+    items:
+      $ref: "./EvaluateCase.yml"
+  symbols:
+    type:
+      - object
+      - "null"
+    description: >
+      Optional map of symbol code to symbol definition, used by
+      symbolic/math evaluation functions to interpret the submission.
+    additionalProperties:
+      $ref: "./EvaluateSymbol.yml"
+  submissionContext:
+    type:
+      - object
+      - "null"
+    description: Optional context about the submission's place in a wider attempt history.
+    properties:
+      submissionsPerStudentPerResponseArea:
+        type:
+          - integer
+          - "null"
+        description: Optional count of submissions this student has made for this response area so far.

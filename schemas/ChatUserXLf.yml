@@ -1,0 +1,23 @@
+type: object
+description: >
+  Lambda Feedback's per-user fields, namespaced under
+  `user.vendorExtensions.x-lf` on a Chat request. Carries the learner's
+  conversational-style preference and their progress on the current task,
+  as tracked by LF's client-backend.
+additionalProperties: true
+properties:
+  conversationalStyle:
+    type:
+      - string
+      - "null"
+    description: >
+      Free-text description of the learner's preferred conversational
+      style, managed by the LLM itself rather than drawn from a fixed
+      enum.
+  taskProgress:
+    type:
+      - object
+      - "null"
+    description: The learner's progress on the current question.
+    allOf:
+      - $ref: "./ChatTaskProgress.yml"

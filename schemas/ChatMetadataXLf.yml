@@ -1,0 +1,25 @@
+type: object
+description: >
+  Lambda Feedback's fields on a Chat response. These are documented as a
+  convention only: µEd-api's ChatResponse.yml declares `metadata` as an
+  already-open (`additionalProperties: true`) bag with no `vendorExtensions`
+  $ref of its own, so these 3 fields live directly under
+  `ChatResponse.metadata` rather than under a nested
+  `vendorExtensions.x-lf` key.
+additionalProperties: true
+properties:
+  summary:
+    type:
+      - string
+      - "null"
+    description: Updated running conversation summary, echoing/superseding the request-side summary.
+  conversationalStyle:
+    type:
+      - string
+      - "null"
+    description: Free-text conversational style used or inferred for this response.
+  processingTimeMs:
+    type:
+      - number
+      - "null"
+    description: Server-side processing time for generating this response, in milliseconds.

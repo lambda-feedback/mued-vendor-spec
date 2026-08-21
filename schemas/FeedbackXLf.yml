@@ -1,0 +1,45 @@
+type: object
+description: >
+  Lambda Feedback's grading-detail fields for a single Feedback item,
+  namespaced under `vendorExtensions.x-lf`. µEd-api's Feedback.yml does
+  not declare a `vendorExtensions` $ref of its own; these fields attach
+  by convention under Feedback's existing open (additionalProperties)
+  shape rather than through the formal VendorExtensions.yml mechanism.
+additionalProperties: true
+properties:
+  matchedCase:
+    type:
+      - integer
+      - string
+      - "null"
+    description: >
+      Index or identifier of the grading case (see EvaluateCase.yml) that
+      matched the submission, if any.
+  responseLatex:
+    type:
+      - string
+      - "null"
+    description: Optional LaTeX rendering of the parsed/interpreted response.
+  responseSimplified:
+    type:
+      - string
+      - "null"
+    description: Optional simplified/normalized form of the response.
+  preSubmissionFeedback:
+    type:
+      - object
+      - "null"
+    description: >
+      Optional preview-only feedback shown before a final submission is
+      committed. Not present on final (non-preview) evaluations.
+    properties:
+      latex:
+        type:
+          - string
+          - "null"
+        description: Optional LaTeX preview of the interpreted response.
+      sympy:
+        type:
+          - string
+          - "null"
+        description: Optional SymPy-expression preview of the interpreted response.

@@ -1,0 +1,33 @@
+type: object
+description: A single part of a question, containing its own content and response areas.
+required:
+  - position
+properties:
+  position:
+    type: integer
+    description: Ordinal position of this part within the question.
+  content:
+    type: string
+    description: Part-specific content shown to the learner.
+  answerContent:
+    type: string
+    description: Reference answer content for this part.
+  workedSolutionSections:
+    type: array
+    description: Optional worked-solution sections for this part. Structure is not standardized.
+    items:
+      type: object
+      additionalProperties: true
+  structuredTutorialSections:
+    type: array
+    description: Optional structured tutorial sections for this part. Structure is not standardized.
+    items:
+      type: object
+      additionalProperties: true
+  responseAreas:
+    type:
+      - array
+      - "null"
+    description: Response areas contained in this part, or null if this part has none.
+    items:
+      $ref: "./ChatResponseArea.yml"

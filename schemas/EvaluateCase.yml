@@ -1,0 +1,32 @@
+type: object
+description: >
+  A single grading case: an expected answer to match against, the mark
+  awarded on match, and optional feedback/display metadata.
+required:
+  - answer
+  - mark
+properties:
+  answer:
+    description: >
+      Expected answer for this case. Shape depends on the evaluation
+      function in use (e.g. a string, number, or structured object).
+  feedback:
+    type:
+      - string
+      - "null"
+    description: Optional feedback text shown when this case matches.
+  mark:
+    type: number
+    format: double
+    description: Mark awarded when this case matches.
+  color:
+    type:
+      - string
+      - "null"
+    description: Optional display color hint for this case (UI convenience).
+  params:
+    type:
+      - object
+      - "null"
+    description: Optional case-specific parameters passed to the evaluation function.
+    additionalProperties: true

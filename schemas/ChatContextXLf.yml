@@ -1,0 +1,39 @@
+type: object
+description: >
+  Lambda Feedback's conversational-context fields, namespaced under
+  `context.vendorExtensions.x-lf` on a Chat request. Carries the running
+  conversation summary plus the LF module/set/question the conversation
+  is scoped to. Module/set/question have no stable IDs on the wire today
+  (see this repo's README, "Current limitations") — only positional
+  `number`/`position` values are available.
+additionalProperties: true
+properties:
+  summary:
+    type: string
+    description: Running summary of the conversation so far, maintained by LF's client.
+  set:
+    type:
+      - object
+      - "null"
+    description: The problem set the current question belongs to.
+    required:
+      - title
+      - number
+      - description
+    properties:
+      title:
+        type: string
+        description: Title of the set.
+      number:
+        type: integer
+        description: Ordinal number of the set.
+      description:
+        type: string
+        description: Description of the set.
+  question:
+    type:
+      - object
+      - "null"
+    description: The question currently in scope for the conversation.
+    allOf:
+      - $ref: "./ChatQuestion.yml"

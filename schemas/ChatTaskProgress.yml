@@ -1,0 +1,27 @@
+type: object
+description: >
+  The learner's progress on the current question, as tracked by LF's
+  client-backend.
+properties:
+  timeSpentOnQuestion:
+    type:
+      - string
+      - "null"
+    description: Free-text elapsed time spent on the question overall (not a fixed duration format).
+  accessStatus:
+    type:
+      - string
+      - "null"
+    description: Free-text access status for the question (not a fixed enum in the current wire shape).
+  markedDone:
+    type:
+      - string
+      - "null"
+    description: Free-text completion marker for the question (not a boolean/fixed enum).
+  currentPart:
+    type:
+      - object
+      - "null"
+    description: Progress detail for the part the learner currently has open, if any.
+    allOf:
+      - $ref: "./ChatTaskProgressPart.yml"

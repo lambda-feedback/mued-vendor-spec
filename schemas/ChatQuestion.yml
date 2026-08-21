@@ -1,0 +1,26 @@
+type: object
+description: The question currently in scope for the conversation.
+required:
+  - title
+  - number
+properties:
+  title:
+    type: string
+    description: Title of the question.
+  number:
+    type: integer
+    description: Ordinal number of the question within its set.
+  guidance:
+    type: string
+    description: Guidance text shown to the learner for this question.
+  content:
+    type: string
+    description: Top-level question content/prompt.
+  estimatedTime:
+    type: string
+    description: Free-text estimate of expected time to complete (not a fixed duration format).
+  parts:
+    type: array
+    description: Ordered list of parts making up this question.
+    items:
+      $ref: "./ChatQuestionPart.yml"

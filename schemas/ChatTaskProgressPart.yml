@@ -1,0 +1,41 @@
+type: object
+description: Progress detail for the part the learner currently has open.
+properties:
+  position:
+    type: integer
+    description: Ordinal position of the current part.
+  timeSpentOnPart:
+    type: string
+    description: Free-text elapsed time spent on this part (not a fixed duration format).
+  markedDone:
+    type: string
+    description: >
+      Free-text completion marker for this part as tracked by LF's client
+      (not a boolean/fixed enum in the current wire shape).
+  responseAreas:
+    type: array
+    description: Per-response-area submission progress within the current part.
+    items:
+      type: object
+      properties:
+        responseType:
+          type: string
+          description: Identifier for the kind of response expected (evaluation-function-specific).
+        totalSubmissions:
+          type: integer
+          description: Total number of submissions made for this response area.
+        wrongSubmissions:
+          type: integer
+          description: Number of incorrect submissions made for this response area.
+        latestSubmission:
+          type:
+            - object
+            - "null"
+          description: The most recent submission and its outcome for this response area, if any.
+          properties:
+            submission:
+              description: The submitted value. Shape depends on responseType.
+            feedback:
+              description: Feedback returned for the latest submission. Shape depends on responseType.
+            answer:
+              description: Reference answer used to grade the latest submission, if disclosed.

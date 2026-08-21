@@ -1,0 +1,16 @@
+type: object
+description: A single response area within a question part, or null if the part has none.
+properties:
+  position:
+    type: integer
+    description: Ordinal position of this response area within its part.
+  responseType:
+    type: string
+    description: Identifier for the kind of response expected (evaluation-function-specific).
+  answer:
+    description: >
+      Reference/expected answer for this response area. Shape depends on
+      responseType and is not standardized.
+  preResponseText:
+    type: string
+    description: Optional text shown to the learner before they respond.

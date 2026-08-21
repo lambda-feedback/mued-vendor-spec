@@ -1,0 +1,15 @@
+type: object
+description: >
+  A single named symbol available to the response area's grading context,
+  keyed by its code in the parent `symbols` map (e.g. `"x"`, `"alpha"`).
+required:
+  - latex
+properties:
+  latex:
+    type: string
+    description: LaTeX rendering of the symbol.
+  aliases:
+    type: array
+    description: Alternate plain-text names accepted as equivalent to this symbol.
+    items:
+      type: string
