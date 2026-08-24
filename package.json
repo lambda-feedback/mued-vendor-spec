@@ -1,0 +1,13 @@
+{
+  "name": "lf-mued-extensions",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "compose": "node scripts/compose.mjs",
+    "lint:composed": "redocly lint composed/openapi.yml"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^2.15.1",
+    "js-yaml": "^4.1.0"
+  }
+}

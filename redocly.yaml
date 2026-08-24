@@ -1,0 +1,12 @@
+# Redocly CLI configuration
+# https://redocly.com/docs/cli/configuration/
+#
+# Mirrors mued-api/spec's own redocly.yaml so the composed spec lints
+# against the same baseline as the upstream document it's built from.
+
+extends:
+  - recommended
+
+rules:
+  no-empty-servers: off
+  security-defined: off

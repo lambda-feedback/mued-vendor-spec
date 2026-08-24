@@ -87,3 +87,44 @@ This repo has no formal versioning scheme yet; it tracks LF's
 `client-backend` adapter code as of the date of each commit. If/when
 this repo is published, consider tagging releases that correspond to
 adapter versions.
+
+## Composed spec: µEd-api + x-lf, all in one document
+
+[`composed/openapi.yml`](composed/openapi.yml) is a generated,
+single-file OpenAPI document: µEd-api's full bundled spec with these
+fragments spliced into every `vendorExtensions` attachment point (plus
+`Feedback.vendorExtensions` and `ChatResponse.metadata`, per the two
+conventions noted above). It's a demo/preview artifact, not part of
+µEd-api's canonical spec — µEd-api itself can never bake in one vendor's
+shape, since `vendorExtensions` has to stay generic for every vendor.
+Open it in Swagger UI, Redocly, or Stoplight to see the full
+"µEd-api + Lambda Feedback" contract in one place.
+
+It's produced by [`scripts/compose.mjs`](scripts/compose.mjs), which:
+
+1. reads a bundled `mued-api/spec` `openapi.yml` (produce one with
+   `npm run bundle` in a checkout of that repo, or point `MUED_SPEC_PATH`
+   at an existing one),
+2. loads every fragment in `schemas/`,
+3. adds them to the spec's `components.schemas`, and
+4. splices an `x-lf` reference into each known `vendorExtensions` site
+   (erroring out if the upstream shape it expects has moved, rather than
+   silently producing something wrong).
+
+### Regenerating locally
+
+```bash
+npm install
+MUED_SPEC_PATH=../mEd-api/dist/openapi.yml npm run compose   # or omit the env var if mEd-api is checked out as a ../mEd-api sibling
+npm run lint:composed
+```
+
+### Keeping it current in CI
+
+[`.github/workflows/compose.yml`](.github/workflows/compose.yml)
+regenerates and lints `composed/openapi.yml` and commits it back to the
+repo when it changes. It runs on pushes that touch `schemas/`,
+`scripts/compose.mjs`, or the compose tooling's own config, plus a daily
+schedule (and manual `workflow_dispatch`) to pick up upstream
+`mued-api/spec` changes, since a push to that separate repo doesn't
+otherwise trigger this workflow.

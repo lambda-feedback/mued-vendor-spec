@@ -1,0 +1,66 @@
+name: Compose µEd-api + x-lf spec
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "schemas/**"
+      - "scripts/compose.mjs"
+      - "package.json"
+      - "package-lock.json"
+      - "redocly.yaml"
+  schedule:
+    # Daily — catches upstream mued-api/spec changes, since pushes to that
+    # separate repo don't otherwise trigger this workflow.
+    - cron: "17 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  compose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout lf-mued-extensions
+        uses: actions/checkout@v4
+
+      - name: Checkout mued-api/spec
+        uses: actions/checkout@v4
+        with:
+          repository: mued-api/spec
+          path: mued-api-spec
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Bundle mued-api/spec
+        working-directory: mued-api-spec
+        run: |
+          npm install
+          npm run bundle
+
+      - name: Install lf-mued-extensions dependencies
+        run: npm install
+
+      - name: Compose combined spec
+        env:
+          MUED_SPEC_PATH: mued-api-spec/dist/openapi.yml
+        run: npm run compose
+
+      - name: Lint composed spec
+        run: npm run lint:composed
+
+      - name: Commit composed spec if changed
+        run: |
+          if ! git diff --quiet -- composed/openapi.yml; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add composed/openapi.yml
+            git commit -m "Regenerate composed openapi.yml [skip ci]"
+            git push
+          else
+            echo "No changes to composed spec."
+          fi
