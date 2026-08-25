@@ -98,7 +98,13 @@ conventions noted above). It's a demo/preview artifact, not part of
 µEd-api's canonical spec — µEd-api itself can never bake in one vendor's
 shape, since `vendorExtensions` has to stay generic for every vendor.
 Open it in Swagger UI, Redocly, or Stoplight to see the full
-"µEd-api + Lambda Feedback" contract in one place.
+"µEd-api + Lambda Feedback" contract in one place. It also adds four
+named request/response examples (`chatWithLfExtensions`,
+`chatWithLfExtensionsResponse`, `withLfExtensions`,
+`exampleResponseWithLfExtensions`) alongside mEd-api's existing generic
+ones, showing a full `/chat` and `/evaluate` request/response with
+`x-lf` populated — each reusing its schema fragment's own `examples[0]`
+rather than duplicating the content.
 
 It's produced by [`scripts/compose.mjs`](scripts/compose.mjs), which:
 

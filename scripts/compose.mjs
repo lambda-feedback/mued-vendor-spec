@@ -184,7 +184,127 @@ function requireProp(obj, key, contextLabel) {
   Object.assign(metadata.properties, fragments.ChatMetadataXLf.properties);
 }
 
-// 5. Write the composed spec.
+// 5. Inject example request/response payloads showing x-lf populated,
+//    alongside mEd-api's existing generic named examples. The x-lf portion
+//    of each is pulled from the fragment's own `examples[0]` (not
+//    hand-duplicated), so these can never drift out of sync with the
+//    schema-level examples.
+function requireExamplesMap(pathKey, method, part, statusCode) {
+  const operation = spec.paths?.[pathKey]?.[method];
+  if (!operation) {
+    throw new Error(
+      `Expected operation ${method.toUpperCase()} ${pathKey} not found — has mEd-api's spec shape changed?`,
+    );
+  }
+  const content =
+    part === "requestBody"
+      ? operation.requestBody?.content?.["application/json"]
+      : operation.responses?.[statusCode]?.content?.["application/json"];
+  if (!content) {
+    throw new Error(
+      `Expected ${part} application/json content not found on ${method.toUpperCase()} ${pathKey} — has mEd-api's spec shape changed?`,
+    );
+  }
+  content.examples = content.examples || {};
+  return content.examples;
+}
+
+function addExample(examplesMap, key, example) {
+  if (examplesMap[key]) {
+    throw new Error(
+      `Example name collision: "${key}" already exists in mEd-api's spec. Rename the new example.`,
+    );
+  }
+  examplesMap[key] = example;
+}
+
+// Chat request: context + user x-lf populated.
+addExample(
+  requireExamplesMap("/chat", "post", "requestBody"),
+  "chatWithLfExtensions",
+  {
+    summary: "Chat request with Lambda Feedback (x-lf) vendor extensions",
+    value: {
+      messages: [
+        {
+          role: "USER",
+          content:
+            "Can you give me a hint for converting 11010 from binary to decimal?",
+        },
+      ],
+      user: {
+        type: "LEARNER",
+        vendorExtensions: { "x-lf": fragments.ChatUserXLf.examples[0] },
+      },
+      context: {
+        vendorExtensions: { "x-lf": fragments.ChatContextXLf.examples[0] },
+      },
+    },
+  },
+);
+
+// Chat response: metadata carrying LF's flat response-side fields.
+addExample(
+  requireExamplesMap("/chat", "post", "responses", "200"),
+  "chatWithLfExtensionsResponse",
+  {
+    summary: "Chat response with Lambda Feedback (x-lf) metadata",
+    value: {
+      output: {
+        role: "ASSISTANT",
+        content:
+          "Think about what each binary digit represents as a power of 2, starting from the right. Try adding up the values of the digits that are 1.",
+      },
+      metadata: fragments.ChatMetadataXLf.examples[0],
+    },
+  },
+);
+
+// Evaluate request: configuration.vendorExtensions.x-lf populated.
+addExample(
+  requireExamplesMap("/evaluate", "post", "requestBody"),
+  "withLfExtensions",
+  {
+    summary:
+      "Evaluate request with Lambda Feedback (x-lf) grading configuration",
+    value: {
+      submission: {
+        submissionId: "sub-lf-001",
+        taskId: "task-algebra-201",
+        type: "MATH",
+        format: "sympy",
+        content: { expression: "x**2 + 2*x + 1" },
+        submittedAt: "2025-12-16T09:30:00Z",
+        version: 1,
+      },
+      configuration: {
+        vendorExtensions: {
+          "x-lf": fragments.EvaluateConfigurationXLf.examples[0],
+        },
+      },
+    },
+  },
+);
+
+// Evaluate response: one Feedback item's vendorExtensions.x-lf populated.
+addExample(
+  requireExamplesMap("/evaluate", "post", "responses", "200"),
+  "exampleResponseWithLfExtensions",
+  {
+    summary: "Feedback response with Lambda Feedback (x-lf) grading details",
+    value: [
+      {
+        feedbackId: "fb-lf-1",
+        title: "Correct, fully expanded",
+        message: "Your answer matches the fully expanded reference form.",
+        awardedPoints: 1.0,
+        vendorExtensions: { "x-lf": fragments.FeedbackXLf.examples[0] },
+      },
+    ],
+  },
+);
+
+// 6. Write the composed spec.
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 const header = `# GENERATED FILE — do not edit by hand.
 # Composed by scripts/compose.mjs from:

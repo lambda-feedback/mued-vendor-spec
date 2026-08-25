@@ -338,6 +338,43 @@ paths:
                         2. **Method overriding**: Subclasses provide specific implementations
                     submittedAt: '2025-12-16T15:30:00Z'
                     version: 1
+              withLfExtensions:
+                summary: Evaluate request with Lambda Feedback (x-lf) grading configuration
+                value:
+                  submission:
+                    submissionId: sub-lf-001
+                    taskId: task-algebra-201
+                    type: MATH
+                    format: sympy
+                    content:
+                      expression: x**2 + 2*x + 1
+                    submittedAt: '2025-12-16T09:30:00Z'
+                    version: 1
+                  configuration:
+                    vendorExtensions:
+                      x-lf:
+                        gradeParams:
+                          atol: 0.001
+                          rtol: 0.01
+                        cases:
+                          - answer: x**2 + 2*x + 1
+                            feedback: Correct — that's the fully expanded form.
+                            mark: 1
+                            color: green
+                          - answer: (x + 1)**2
+                            feedback: Correct, but not fully expanded. Try multiplying it out.
+                            mark: 0.5
+                            color: amber
+                        symbols:
+                          x:
+                            latex: x
+                            aliases: []
+                          alpha:
+                            latex: \alpha
+                            aliases:
+                              - alpha
+                        submissionContext:
+                          submissionsPerStudentPerResponseArea: 3
       responses:
         '200':
           description: Successfully generated feedback.
@@ -380,6 +417,21 @@ paths:
                     - feedbackId: fb-2
                       title: Overall structure
                       message: The overall structure of your answer is clear and easy to follow.
+                exampleResponseWithLfExtensions:
+                  summary: Feedback response with Lambda Feedback (x-lf) grading details
+                  value:
+                    - feedbackId: fb-lf-1
+                      title: Correct, fully expanded
+                      message: Your answer matches the fully expanded reference form.
+                      awardedPoints: 1
+                      vendorExtensions:
+                        x-lf:
+                          matchedCase: 0
+                          responseLatex: x^{2} + 2x + 1
+                          responseSimplified: x**2 + 2*x + 1
+                          preSubmissionFeedback:
+                            latex: x^{2} + 2x + 1
+                            sympy: x**2 + 2*x + 1
         '202':
           $ref: '#/components/responses/202-Accepted'
         '400':
@@ -586,6 +638,58 @@ paths:
                     llm:
                       model: gpt-5.2
                       temperature: 0.5
+              chatWithLfExtensions:
+                summary: Chat request with Lambda Feedback (x-lf) vendor extensions
+                value:
+                  messages:
+                    - role: USER
+                      content: Can you give me a hint for converting 11010 from binary to decimal?
+                  user:
+                    type: LEARNER
+                    vendorExtensions:
+                      x-lf:
+                        conversationalStyle: Be concise, encouraging, and avoid giving the answer directly.
+                        taskProgress:
+                          timeSpentOnQuestion: 58 minutes
+                          accessStatus: too much time spent on this question today.
+                          markedDone: This question is still being worked on.
+                          currentPart:
+                            position: 0
+                            timeSpentOnPart: 37 minutes
+                            markedDone: This part is not marked done.
+                            responseAreas:
+                              - responseType: NUMBER
+                                totalSubmissions: 1
+                                wrongSubmissions: 1
+                                latestSubmission:
+                                  submission: 1
+                                  feedback: Incorrect
+                                  answer: '26'
+                  context:
+                    vendorExtensions:
+                      x-lf:
+                        summary: Student attempted to convert the binary number 11010 to decimal and got it wrong.
+                        set:
+                          title: Computing
+                          number: 8
+                          description: Introductory binary and number systems.
+                        question:
+                          title: Binary Numbers
+                          number: 0
+                          guidance: Convert the given binary number to its decimal equivalent.
+                          content: Convert the following binary number to decimal.
+                          estimatedTime: 5-10 minutes
+                          parts:
+                            - position: 0
+                              content: What is $11010_2$ in decimal?
+                              answerContent: '26'
+                              workedSolutionSections: []
+                              structuredTutorialSections: []
+                              responseAreas:
+                                - position: 0
+                                  responseType: NUMBER
+                                  answer: 26
+                                  preResponseText: $11010_2 =$
       responses:
         '200':
           description: Successful chat response.
@@ -643,6 +747,16 @@ paths:
                         model: gpt-5.2
                         temperature: 0.5
                         outputTokens: 143
+                chatWithLfExtensionsResponse:
+                  summary: Chat response with Lambda Feedback (x-lf) metadata
+                  value:
+                    output:
+                      role: ASSISTANT
+                      content: Think about what each binary digit represents as a power of 2, starting from the right. Try adding up the values of the digits that are 1.
+                    metadata:
+                      summary: Student asked for a hint converting binary to decimal; explained positional place values without giving the final answer.
+                      conversationalStyle: Be concise, encouraging, and avoid giving the answer directly.
+                      processingTimeMs: 842
         '400':
           $ref: '#/components/responses/400-BadRequest-2'
         '403':
