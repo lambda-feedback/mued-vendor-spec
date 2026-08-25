@@ -7,6 +7,29 @@ description: >
   (see this repo's README, "Current limitations") — only positional
   `number`/`position` values are available.
 additionalProperties: true
+examples:
+  - summary: "Student attempted to convert the binary number 11010 to decimal and got it wrong."
+    set:
+      title: Computing
+      number: 8
+      description: Introductory binary and number systems.
+    question:
+      title: Binary Numbers
+      number: 0
+      guidance: Convert the given binary number to its decimal equivalent.
+      content: Convert the following binary number to decimal.
+      estimatedTime: 5-10 minutes
+      parts:
+        - position: 0
+          content: "What is $11010_2$ in decimal?"
+          answerContent: "26"
+          workedSolutionSections: []
+          structuredTutorialSections: []
+          responseAreas:
+            - position: 0
+              responseType: NUMBER
+              answer: 26
+              preResponseText: "$11010_2 =$"
 properties:
   summary:
     type: string

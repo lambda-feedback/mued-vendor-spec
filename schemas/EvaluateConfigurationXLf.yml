@@ -5,6 +5,29 @@ description: >
   are evaluation-function-defined and vary by grading function in use;
   none are standardized across LF evaluation functions.
 additionalProperties: true
+examples:
+  - gradeParams:
+      atol: 0.001
+      rtol: 0.01
+    cases:
+      - answer: "x**2 + 2*x + 1"
+        feedback: "Correct — that's the fully expanded form."
+        mark: 1.0
+        color: green
+      - answer: "(x + 1)**2"
+        feedback: "Correct, but not fully expanded. Try multiplying it out."
+        mark: 0.5
+        color: amber
+    symbols:
+      x:
+        latex: x
+        aliases: []
+      alpha:
+        latex: "\\alpha"
+        aliases:
+          - alpha
+    submissionContext:
+      submissionsPerStudentPerResponseArea: 3
 properties:
   gradeParams:
     type:

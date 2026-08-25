@@ -5,6 +5,24 @@ description: >
   conversational-style preference and their progress on the current task,
   as tracked by LF's client-backend.
 additionalProperties: true
+examples:
+  - conversationalStyle: "Be concise, encouraging, and avoid giving the answer directly."
+    taskProgress:
+      timeSpentOnQuestion: 58 minutes
+      accessStatus: too much time spent on this question today.
+      markedDone: This question is still being worked on.
+      currentPart:
+        position: 0
+        timeSpentOnPart: 37 minutes
+        markedDone: This part is not marked done.
+        responseAreas:
+          - responseType: NUMBER
+            totalSubmissions: 1
+            wrongSubmissions: 1
+            latestSubmission:
+              submission: 1
+              feedback: Incorrect
+              answer: "26"
 properties:
   conversationalStyle:
     type:

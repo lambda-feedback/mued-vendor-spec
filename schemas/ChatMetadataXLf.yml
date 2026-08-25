@@ -7,6 +7,10 @@ description: >
   `ChatResponse.metadata` rather than under a nested
   `vendorExtensions.x-lf` key.
 additionalProperties: true
+examples:
+  - summary: "Student asked for a hint converting binary to decimal; explained positional place values without giving the final answer."
+    conversationalStyle: "Be concise, encouraging, and avoid giving the answer directly."
+    processingTimeMs: 842
 properties:
   summary:
     type:
