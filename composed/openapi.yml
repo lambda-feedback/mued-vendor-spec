@@ -354,27 +354,23 @@ paths:
                     vendorExtensions:
                       x-lf:
                         gradeParams:
-                          atol: 0.001
-                          rtol: 0.01
+                          strict_syntax: false
+                          elementary_functions: true
+                          criteria: response = answer, response written as answer
+                          custom_feedback:
+                            response written as answer_FALSE: Right value, but not in the requested expanded form.
                         cases:
                           - answer: x**2 + 2*x + 1
                             feedback: Correct — that's the fully expanded form.
                             mark: 1
                             color: green
-                          - answer: (x + 1)**2
-                            feedback: Correct, but not fully expanded. Try multiplying it out.
-                            mark: 0.5
-                            color: amber
                         symbols:
                           x:
-                            latex: x
+                            latex: \(x\)
                             aliases: []
                           alpha:
                             latex: \alpha
-                            aliases:
-                              - alpha
-                        submissionContext:
-                          submissionsPerStudentPerResponseArea: 3
+                            aliases: []
       responses:
         '200':
           description: Successfully generated feedback.
@@ -2195,27 +2191,23 @@ components:
       additionalProperties: true
       examples:
         - gradeParams:
-            atol: 0.001
-            rtol: 0.01
+            strict_syntax: false
+            elementary_functions: true
+            criteria: response = answer, response written as answer
+            custom_feedback:
+              response written as answer_FALSE: Right value, but not in the requested expanded form.
           cases:
             - answer: x**2 + 2*x + 1
               feedback: Correct — that's the fully expanded form.
               mark: 1
               color: green
-            - answer: (x + 1)**2
-              feedback: Correct, but not fully expanded. Try multiplying it out.
-              mark: 0.5
-              color: amber
           symbols:
             x:
-              latex: x
+              latex: \(x\)
               aliases: []
             alpha:
               latex: \alpha
-              aliases:
-                - alpha
-          submissionContext:
-            submissionsPerStudentPerResponseArea: 3
+              aliases: []
       properties:
         gradeParams:
           type:
