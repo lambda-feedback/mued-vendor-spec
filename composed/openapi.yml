@@ -43,10 +43,9 @@ paths:
                   submission:
                     submissionId: sub-123
                     taskId: task-42
-                    type: TEXT
-                    format: plain
+                    format: text:plain
                     content:
-                      text: Explain what polymorphism is in object-oriented programming.
+                      value: Explain what polymorphism is in object-oriented programming.
                     submittedAt: '2025-12-16T09:30:00Z'
                     version: 1
                   configuration: null
@@ -56,10 +55,9 @@ paths:
                   submission:
                     submissionId: sub-777
                     taskId: task-42
-                    type: TEXT
-                    format: plain
+                    format: text:plain
                     content:
-                      text: My short answer...
+                      value: My short answer...
                   preSubmissionFeedback:
                     enabled: true
                   configuration:
@@ -72,10 +70,9 @@ paths:
                   submission:
                     submissionId: sub-async-001
                     taskId: task-42
-                    type: TEXT
-                    format: plain
+                    format: text:plain
                     content:
-                      text: Detailed essay answer that may require longer processing.
+                      value: Detailed essay answer that may require longer processing.
                     submittedAt: '2025-12-16T09:45:00Z'
                     version: 1
                   callbackUrl: https://learning-platform.example.com/hooks/evaluate-result
@@ -91,7 +88,7 @@ paths:
                       - Explain the concept of polymorphism.
                       - Provide an example of subtype polymorphism in Java.
                     referenceSolution:
-                      text: |
+                      value: |
                         Polymorphism allows the same method call to result in different behavior depending on the object's runtime type. For example, a variable of type Shape can reference a Circle or Rectangle, and calling draw() will invoke the appropriate implementation.
                     context:
                       constraints: Answer in 3-6 sentences.
@@ -99,19 +96,19 @@ paths:
                   submission:
                     submissionId: sub-456
                     taskId: task-12
-                    type: TEXT
-                    format: plain
+                    format: text:plain
                     content:
-                      text: |
+                      value: |
                         Polymorphism means that an object can take many forms, for example subclasses implementing methods differently.
                     submittedAt: '2025-12-16T10:00:00Z'
                     version: 2
                   user:
                     userId: user-789
                     type: LEARNER
-                    detailPreference: DETAILED
-                    tonePreference: FRIENDLY
-                    languagePreference: en
+                    preference:
+                      detail: DETAILED
+                      tone: FRIENDLY
+                      language: en
                   criteria:
                     - criterionId: crit-1
                       name: Correctness
@@ -138,10 +135,9 @@ paths:
                   submission:
                     submissionId: sub-code-001
                     taskId: task-python-101
-                    type: CODE
-                    format: python
+                    format: code:python
                     content:
-                      code: |
+                      value: |
                         def fibonacci(n):
                             if n <= 1:
                                 return n
@@ -158,10 +154,9 @@ paths:
                   submission:
                     submissionId: sub-code-002
                     taskId: task-java-201
-                    type: CODE
-                    format: java
+                    format: code:java
                     content:
-                      files:
+                      value:
                         - path: src/Main.java
                           content: |
                             public class Main {
@@ -186,10 +181,9 @@ paths:
                   submission:
                     submissionId: sub-math-002
                     taskId: task-algebra-101
-                    type: CODE
-                    format: sympy
+                    format: code:sympy
                     content:
-                      expression: solve(x**2 - 4, x)
+                      value: solve(x**2 - 4, x)
                       imports:
                         - from sympy import symbols, solve
                         - x = symbols('x')
@@ -201,10 +195,9 @@ paths:
                   submission:
                     submissionId: sub-math-001
                     taskId: task-calculus-101
-                    type: MATH
-                    format: latex
+                    format: math:latex
                     content:
-                      expression: \int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+                      value: \int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
                     submittedAt: '2025-12-16T12:00:00Z'
                     version: 1
               mathMathMLExample:
@@ -213,10 +206,9 @@ paths:
                   submission:
                     submissionId: sub-math-003
                     taskId: task-geometry-101
-                    type: MATH
-                    format: mathml
+                    format: math:mathml
                     content:
-                      expression: |
+                      value: |
                         <math xmlns="http://www.w3.org/1998/Math/MathML">
                           <mrow>
                             <mi>a</mi>
@@ -238,10 +230,9 @@ paths:
                   submission:
                     submissionId: sub-model-001
                     taskId: task-oop-design-101
-                    type: MODEL
-                    format: uml
+                    format: model:uml
                     content:
-                      model: |
+                      value: |
                         @startuml
                         abstract class Animal {
                           +name: String
@@ -266,10 +257,9 @@ paths:
                   submission:
                     submissionId: sub-model-002
                     taskId: task-database-101
-                    type: MODEL
-                    format: er
+                    format: model:er
                     content:
-                      model:
+                      value:
                         entities:
                           - name: Student
                             attributes:
@@ -301,10 +291,9 @@ paths:
                   submission:
                     submissionId: sub-model-003
                     taskId: task-process-101
-                    type: MODEL
-                    format: bpmn
+                    format: model:bpmn
                     content:
-                      model: |
+                      value: |
                         <?xml version="1.0" encoding="UTF-8"?>
                         <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL">
                           <bpmn:process id="OrderProcess">
@@ -324,10 +313,9 @@ paths:
                   submission:
                     submissionId: sub-text-002
                     taskId: task-essay-101
-                    type: TEXT
-                    format: markdown
+                    format: text:markdown
                     content:
-                      markdown: |
+                      value: |
                         # Introduction to Polymorphism
 
                         Polymorphism is a fundamental concept in **object-oriented programming** that allows objects to be treated as instances of their parent class.
@@ -404,8 +392,7 @@ paths:
                         context: The solution produces correct results for the specified problem.
                         maxPoints: 10
                       target:
-                        artefactType: TEXT
-                        format: plain
+                        format: text:plain
                         locator:
                           type: span
                           startIndex: 0
@@ -413,6 +400,36 @@ paths:
                     - feedbackId: fb-2
                       title: Overall structure
                       message: The overall structure of your answer is clear and easy to follow.
+                mathMatchedCaseResponse:
+                  summary: MATH submission that matched a Lambda Feedback case (vendor extension)
+                  value:
+                    - feedbackId: fb-math-1
+                      title: Correct, matched expected case
+                      message: Your answer matches the expected simplified form.
+                      awardedPoints: 3
+                      response:
+                        latex: x+y
+                        sympy: x + y
+                      vendorExtensions:
+                        x-lf:
+                          matchedCase: 0
+                      target:
+                        format: math:latex
+                mathMisconceptionCaseResponse:
+                  summary: MATH submission that matched a Lambda Feedback known-misconception case (vendor extension)
+                  value:
+                    - feedbackId: fb-math-1
+                      title: Check your signs
+                      message: Close, but check the sign of y.
+                      awardedPoints: 1
+                      response:
+                        latex: x-y
+                        sympy: x - y
+                      vendorExtensions:
+                        x-lf:
+                          matchedCase: 1
+                      target:
+                        format: math:latex
                 exampleResponseWithLfExtensions:
                   summary: Feedback response with Lambda Feedback (x-lf) grading details
                   value:
@@ -436,16 +453,80 @@ paths:
           $ref: '#/components/responses/403-Forbidden'
         '406':
           $ref: '#/components/responses/406-VersionNotSupported'
+        '422':
+          $ref: '#/components/responses/422-UnprocessableSubmission'
         '500':
           $ref: '#/components/responses/500-InternalError'
         '501':
           $ref: '#/components/responses/501-NotImplemented'
+  /evaluate/info:
+    get:
+      summary: Information and capabilities of the evaluate service
+      operationId: getEvaluateInfo
+      description: |
+        Returns information and capabilities of the evaluate service. Clients can use this endpoint to discover whether the service supports optional features such as pre-submission feedback, formative feedback, and summative feedback.
+      tags:
+        - evaluate
+      parameters:
+        - $ref: '#/components/parameters/X-Request-Id'
+        - $ref: '#/components/parameters/X-Api-Version'
+      responses:
+        '200':
+          description: Evaluate service is reachable and reporting capabilities.
+          headers:
+            X-Request-Id:
+              description: Request id for tracing this request across services.
+              schema:
+                type: string
+            X-Api-Version:
+              description: The API version that was used to serve this response.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluateInfoResponse'
+              examples:
+                exampleInfo:
+                  summary: Example service with capabilities
+                  value:
+                    version: 1.0.0
+                    capabilities:
+                      supportsEvaluate: true
+                      supportsPreSubmissionFeedback: false
+                      supportsFormativeFeedback: true
+                      supportsSummativeFeedback: true
+                      supportsDataPolicy: PARTIAL
+                      supportedArtefactProfiles:
+                        - type: TEXT
+                          supportedFormats:
+                            - plain
+                            - markdown
+                        - type: CODE
+                          supportedFormats:
+                            - python
+                            - java
+                            - javascript
+                        - type: MATH
+                          supportedFormats:
+                            - latex
+                            - mathml
+                      supportedLanguages:
+                        - en
+                        - de
+                      supportedVersions:
+                        - 0.1.0
+        '406':
+          $ref: '#/components/responses/406-VersionNotSupported'
+        '501':
+          description: The server does not implement the info endpoint for evaluate.
+          $ref: '#/components/responses/501-NotImplemented'
   /evaluate/health:
     get:
-      summary: Health and capabilities of the evaluate service
+      summary: Health of the evaluate service
       operationId: getEvaluateHealth
       description: |
-        Returns health information and capabilities of the evaluate service. Clients can use this endpoint to discover whether the service supports optional features such as pre-submission feedback, formative feedback, and summative feedback.
+        Returns health information of the evaluate service.
       tags:
         - evaluate
       parameters:
@@ -474,31 +555,6 @@ paths:
                     status: OK
                     message: Service healthy
                     version: 1.0.0
-                    capabilities:
-                      supportsEvaluate: true
-                      supportsPreSubmissionFeedback: false
-                      supportsFormativeFeedback: true
-                      supportsSummativeFeedback: true
-                      supportsDataPolicy: PARTIAL
-                      supportedArtefactProfiles:
-                        - type: TEXT
-                          supportedFormats:
-                            - plain
-                            - markdown
-                        - type: CODE
-                          supportedFormats:
-                            - python
-                            - java
-                            - javascript
-                        - type: MATH
-                          supportedFormats:
-                            - latex
-                            - mathml
-                      supportedLanguages:
-                        - en
-                        - de
-                      supportedVersions:
-                        - 0.1.0
         '406':
           $ref: '#/components/responses/406-VersionNotSupported'
         '501':
@@ -532,6 +588,14 @@ paths:
                     - role: USER
                       content: Can you explain polymorphism?
                   configuration: null
+              minimalChatAsynchronous:
+                summary: Asynchronous minimal chat request
+                value:
+                  messages:
+                    - role: USER
+                      content: Can you explain polymorphism?
+                  configuration: null
+                  callbackUrl: https://learning-platform.example.com/hooks/chat-result
               chatWithLlmConfig:
                 summary: Chat request with optional LLM configuration
                 value:
@@ -539,9 +603,10 @@ paths:
                   user:
                     userId: user-456
                     type: LEARNER
-                    detailPreference: MEDIUM
-                    tonePreference: FRIENDLY
-                    languagePreference: en
+                    preference:
+                      detail: MEDIUM
+                      tone: FRIENDLY
+                      language: en
                   messages:
                     - role: USER
                       content: Give me a hint for my answer about polymorphism.
@@ -569,9 +634,10 @@ paths:
                   user:
                     userId: user-321
                     type: LEARNER
-                    detailPreference: DETAILED
-                    tonePreference: NEUTRAL
-                    languagePreference: en
+                    preference:
+                      detail: DETAILED
+                      tone: NEUTRAL
+                      language: en
                     taskProgress:
                       currentQuestionId: question-321
                       timeSpentOnQuestion: 30 minutes
@@ -579,9 +645,9 @@ paths:
                         partId: part-1
                         timeSpentOnPart: 10 minutes
                         submission:
-                          type: TEXT
+                          format: text:plain
                           content:
-                            text: outputs= ["Woof!", "Meow!"]
+                            value: outputs= ["Woof!", "Meow!"]
                           feedback:
                             - feedbackId: fb-101
                               message: Incomplete answer, explain why these outputs occur.
@@ -703,7 +769,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChatResponse'
               examples:
-                minimalChatResponse:
+                minimalChat:
                   summary: Minimal chat response
                   value:
                     output:
@@ -711,7 +777,7 @@ paths:
                       content: |
                         Polymorphism is a core concept in object-oriented programming that allows objects of different classes to be treated as objects of a common superclass. It enables a single interface to represent different underlying forms (data types). For example, in Java, you can have a superclass `Animal` with a method `speak()`, and subclasses like `Dog` and `Cat` that provide their own implementations of `speak()`. When you call `speak()` on an `Animal` reference, the appropriate subclass method is invoked based on the actual object type at runtime.
                     metadata: null
-                chatWithLlmConfigResponse:
+                chatWithLlmConfig:
                   summary: Chat response with LLM configuration
                   value:
                     output:
@@ -726,7 +792,7 @@ paths:
                         model: gpt-5.2
                         temperature: 0.7
                         outputTokens: 78
-                chatWithContextResponse:
+                chatWithContext:
                   summary: Chat response with context
                   value:
                     output:
@@ -763,12 +829,12 @@ paths:
           $ref: '#/components/responses/500-InternalError-2'
         '501':
           $ref: '#/components/responses/501-NotImplemented-2'
-  /chat/health:
+  /chat/info:
     get:
-      summary: Health and capabilities of the chat service
-      operationId: getChatHealth
+      summary: Information of the chat service
+      operationId: getChatInfo
       description: |
-        Returns health information and capabilities of the chat service. Clients can use this endpoint to discover whether the service supports optional features such as user preferences or streaming responses.
+        Returns information and capabilities of the chat service. Clients can use this endpoint to discover whether the service supports optional features such as user preferences or streaming responses.
       tags:
         - chat
       parameters:
@@ -789,13 +855,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChatHealthResponse'
+                $ref: '#/components/schemas/ChatInfoResponse'
               examples:
-                exampleHealth:
-                  summary: Example healthy service with capabilities
+                exampleInfo:
+                  summary: Example service with capabilities
                   value:
-                    status: OK
-                    statusMessage: Service healthy
                     version: 1.0.0
                     capabilities:
                       supportsChat: true
@@ -810,6 +874,45 @@ paths:
                         - llama-3
                       supportedVersions:
                         - 0.1.0
+        '406':
+          $ref: '#/components/responses/406-VersionNotSupported'
+        '501':
+          description: The server does not implement the info endpoint for chat.
+          $ref: '#/components/responses/501-NotImplemented-2'
+  /chat/health:
+    get:
+      summary: Health of the chat service
+      operationId: getChatHealth
+      description: |
+        Returns health of the chat service. Clients can use this endpoint to discover whether the service is healthy
+      tags:
+        - chat
+      parameters:
+        - $ref: '#/components/parameters/X-Request-Id'
+        - $ref: '#/components/parameters/X-Api-Version'
+      responses:
+        '200':
+          description: Chat service is reachable and reporting healthy.
+          headers:
+            X-Request-Id:
+              description: Request id for tracing this request across services.
+              schema:
+                type: string
+            X-Api-Version:
+              description: The API version that was used to serve this response.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatHealthResponse'
+              examples:
+                exampleHealth:
+                  summary: Example healthy service with capabilities
+                  value:
+                    status: OK
+                    statusMessage: Service healthy
+                    version: 1.0.0
         '406':
           $ref: '#/components/responses/406-VersionNotSupported'
         '501':
@@ -876,7 +979,8 @@ components:
           type:
             - object
             - 'null'
-          description: Optional reference or example solution (structure is task-specific).
+          description: |
+            Optional reference or example solution. By convention, follows the same { value: ..., <format-specific fields> } shape as Submission.content.
           additionalProperties: true
         metadata:
           type:
@@ -884,22 +988,12 @@ components:
             - 'null'
           description: Optional metadata such as difficulty, topic, tags, etc.
           additionalProperties: true
-    ArtefactType:
-      type: string
-      description: |
-        High-level type of artefact. Use the 'format' field to specify the exact format (e.g., programming language for CODE, notation for MATH).
-      enum:
-        - TEXT
-        - CODE
-        - MODEL
-        - MATH
-        - OTHER
     Submission:
       type: object
       description: |
         A student's submission for a task. The structure of 'content' is intentionally generic and task-specific.
       required:
-        - type
+        - format
         - content
       properties:
         submissionId:
@@ -910,19 +1004,28 @@ components:
             - string
             - 'null'
           description: Optional identifier of the task this submission belongs to.
-        type:
-          $ref: '#/components/schemas/ArtefactType'
         format:
-          type:
-            - string
-            - 'null'
+          type: string
+          pattern: ^(text|code|math|model|other):[a-z0-9_]+$
           description: |
-            Optional format specifier providing additional detail about the artefact. For TEXT: plain_text, markdown, html, rich_text, etc. For CODE: programming language (e.g., python, java, javascript, wolfram, matlab). For MATH: latex, mathml, sympy, wolfram, asciimath, etc. For MODEL: uml, er, bpmn, petri_net, state_machine, etc. Use lowercase values and snakecase. Services should document which formats they support.
+            Format of the submission content, as "<category>:<format>". The category prefix determines how 'content' should be interpreted, and disambiguates formats (e.g. "sympy" or "wolfram") that exist under more than one category. Recommended values: text:plain, text:markdown, text:html, text:rich_text; code:python, code:java, code:javascript, code:matlab, code:sympy, code:wolfram; math:latex, math:mathml, math:sympy, math:wolfram, math:asciimath; model:uml, model:er, model:bpmn, model:petri_net, model:state_machine; other:<custom> for anything not covered above. Services should document which formats they support.
         content:
           type: object
+          required:
+            - value
           additionalProperties: true
           description: |
-            Logical representation of the submission content. The expected structure depends on the artefact type: - TEXT: { text: string } or { markdown: string } - CODE: { code: string } or { files: [{ path: string, content: string }], entryPoint?: string } - MATH: { expression: string } - MODEL: { model: string | object, notation?: string }
+            Logical representation of the submission content. 'value' holds the submitted content itself; its shape depends on 'format': - text:*: value is a string - code:* (single file): value is a string - code:* (multiple files): value is [{ path: string, content: string }],
+              with an optional sibling 'entryPoint' naming the file to run
+            - math:*: value is a string (e.g. a LaTeX or MathML expression) - model:*: value is a string or object, with optional sibling metadata
+              such as 'notation' or 'diagramType'
+            Format-specific auxiliary fields (e.g. 'entryPoint', 'imports', 'notation', 'diagramType') are additional sibling properties alongside 'value', not nested inside it.
+          properties:
+            value: {}
+        supplementaryContent:
+          type: object
+          additionalProperties: true
+          description: Optional additional content for the learner's submission. This could include workings for math tasks, or raw source code for compiled binaries.
         submittedAt:
           type:
             - string
@@ -963,8 +1066,12 @@ components:
         - object
         - 'null'
       description: |
-        Optional vendor/platform-specific data that does not (yet) have a place in the core µEd schemas. Vendors namespace their fields under a single top-level key of the form `x-<platform-slug>` (following the OpenAPI Specification Extensions convention), e.g. `vendorExtensions.x-lf`. <br><br> µEd-api does not define, host, or validate the contents of any vendor's namespace — each vendor owns and documents its own fields in its own repository. µEd-api only maintains a namespace registry to prevent collisions between vendors. See the registry, usage guidance, and the rule for when a concept graduates from a vendor extension into a core schema at: https://github.com/mued-api/spec/blob/main/VENDOR_EXTENSIONS.md
-      additionalProperties: true
+        Optional vendor/platform-specific data that does not (yet) have a place in the core µEd schemas. Vendors namespace their fields under a single top-level key of the form `x-<platform-slug>` (following the OpenAPI Specification Extensions convention), e.g. `vendorExtensions.x-lf`. <br><br> µEd-api validates only the namespace envelope: every top-level key must match `x-<platform-slug>` (lowercase alphanumeric segments separated by hyphens) and its value must be an object. µEd-api does not define, host, or validate the contents of any vendor's namespace — each vendor owns and documents its own fields in its own repository. µEd-api only maintains a namespace registry to prevent collisions between vendors. See the registry, usage guidance, and the rule for when a concept graduates from a vendor extension into a core schema at: https://github.com/mued-api/spec/blob/main/VENDOR_EXTENSIONS.md
+      patternProperties:
+        ^x-[a-z0-9]+(?:-[a-z0-9]+)*$:
+          type: object
+          additionalProperties: true
+      additionalProperties: false
     User:
       type: object
       description: User information including type and optional preferences influencing response tone, detail, and language.
@@ -1102,7 +1209,8 @@ components:
           description: Optional configuration for grades for this criterion.
     PreSubmissionFeedback:
       type: object
-      description: Optional configuration for pre-submission feedback runs.
+      description: |
+        Optional configuration for pre-submission feedback runs. This only toggles the mode; the actual preview content (e.g., normalized representations of the submission) is returned in the /evaluate response, via each feedback item's `response` field (see Feedback.yml) — not on this schema.
       required:
         - enabled
       additionalProperties: true
@@ -1407,7 +1515,7 @@ components:
             $ref: '#/components/schemas/Criterion'
         preSubmissionFeedback:
           description: |
-            Optional settings for pre-submission feedback (non-final). When enabled, the service should avoid committing or finalizing grades.
+            Optional settings for pre-submission feedback (non-final). When enabled, the service should avoid committing or finalizing grades. The resulting preview content is returned via the response Feedback items' `response` field.
           type:
             - object
             - 'null'
@@ -1460,27 +1568,32 @@ components:
       type: object
       description: Optional reference to a specific part of the submission.
       required:
-        - artefactType
+        - format
       properties:
-        artefactType:
-          $ref: '#/components/schemas/ArtefactType'
         format:
-          type:
-            - string
-            - 'null'
+          type: string
+          pattern: ^(text|code|math|model|other):[a-z0-9_]+$
           description: |
-            Optional format specifier matching the submission format (e.g., python, latex).
+            Format of the targeted artefact, matching the submission's format (see Submission.format).
         locator:
           type:
             - object
             - 'null'
           description: |
-            Optional locator into the submission content. Standard locator types: - TEXT: { type: "span", startIndex: number, endIndex: number } - CODE: { type: "range", file?: string, startLine: number, endLine: number, startColumn?: number, endColumn?: number } - MATH: { type: "subexpression", path: string } (e.g., path to subexpression) - MODEL: { type: "element", elementId: string, elementType?: string }
+            Optional locator into the submission content. Standard locator types: - text:*: { type: "span", startIndex: number, endIndex: number } - code:*: { type: "range", file?: string, startLine: number, endLine: number, startColumn?: number, endColumn?: number } - math:*: { type: "subexpression", path: string } (e.g., path to subexpression) - model:*: { type: "element", elementId: string, elementType?: string }
           additionalProperties: true
+    FormattedContent:
+      type:
+        - object
+        - 'null'
+      description: |
+        A set of representations of the same underlying content, keyed by an arbitrary format id (e.g. "latex", "sympy", "formatted", "ast"). The set of keys is service-defined and not enumerated by this spec.
+      additionalProperties:
+        type: string
     Feedback:
       type: object
       description: |
-        A single feedback item produced for the submission. It may include suggested actions, optional points, optional criterion linkage, and optional targeting into the submission.
+        A single feedback item produced for the submission. It may include suggested actions, optional points, optional criterion linkage, optional targeting into the submission, optional normalized representation(s) of the submission, and optional vendor-specific extensions.
       properties:
         feedbackId:
           type: string
@@ -1520,6 +1633,14 @@ components:
           description: Optional target reference inside the submission.
           allOf:
             - $ref: '#/components/schemas/FeedbackTarget'
+        response:
+          type:
+            - object
+            - 'null'
+          description: |
+            Optional normalized representation(s) of the submission as interpreted by the service (e.g., a parsed or simplified rendering), keyed by format — for example { latex: "x+y", sympy: "x + y" }. Also used to carry pre-submission preview content when the request's preSubmissionFeedback.enabled was set to true.
+          allOf:
+            - $ref: '#/components/schemas/FormattedContent'
         vendorExtensions:
           type:
             - object
@@ -1579,13 +1700,6 @@ components:
             - 'null'
           description: Optional provider-specific details for debugging or programmatic handling.
           additionalProperties: true
-    HealthStatus:
-      type: string
-      description: Overall health status of the service.
-      enum:
-        - OK
-        - DEGRADED
-        - UNAVAILABLE
     EvaluateRequirements:
       type: object
       description: |
@@ -1617,30 +1731,25 @@ components:
     ArtefactProfile:
       type: object
       description: |
-        Describes support for a specific artefact type and its formats. Used in health/capabilities responses to advertise what a service can handle.
-      required:
-        - type
+        Describes support for a set of submission formats. Used in health/capabilities responses to advertise what a service can handle.
       properties:
-        type:
-          $ref: '#/components/schemas/ArtefactType'
         supportedFormats:
           type:
             - array
             - 'null'
           description: |
-            List of supported formats for this artefact type. Use lowercase values. If null or empty, the service accepts any format for this type.
+            List of supported formats, using the same namespaced "<category>:<format>" convention as Submission.format (see Submission.yml). A category-wildcard entry (e.g. "code:*") means the service accepts any format in that category. If null or empty, the service accepts any format.
           items:
             type: string
           examples:
-            - - plain
-              - markdown
-            - - python
-              - java
-              - javascript
-              - wolfram
-              - matlab
-            - - latex
-              - mathml
+            - - text:plain
+              - text:markdown
+            - - code:python
+              - code:java
+              - code:javascript
+              - code:sympy
+            - - math:latex
+              - math:mathml
         contentSchema:
           type:
             - object
@@ -1685,7 +1794,7 @@ components:
             - array
             - 'null'
           description: |
-            Optional list of supported artefact profiles. Each profile specifies an artefact type and the formats supported for that type.
+            Optional list of supported artefact profiles. Each profile specifies a set of supported formats.
           items:
             $ref: '#/components/schemas/ArtefactProfile'
         supportedLanguages:
@@ -1703,20 +1812,12 @@ components:
             Optional list of µEd API versions supported by this service implementation (e.g., ["0.1.0"]). Clients can use this to select a compatible X-Api-Version.
           items:
             type: string
-    EvaluateHealthResponse:
+    EvaluateInfoResponse:
       type: object
-      description: Health status and capabilities of the evaluate service.
+      description: Information and capabilities of the evaluate service.
       required:
-        - status
         - capabilities
       properties:
-        status:
-          $ref: '#/components/schemas/HealthStatus'
-        message:
-          type:
-            - string
-            - 'null'
-          description: Optional human-readable status message.
         version:
           type:
             - string
@@ -1731,6 +1832,31 @@ components:
             - $ref: '#/components/schemas/EvaluateRequirements'
         capabilities:
           $ref: '#/components/schemas/EvaluateCapabilities'
+    HealthStatus:
+      type: string
+      description: Overall health status of the service.
+      enum:
+        - OK
+        - DEGRADED
+        - UNAVAILABLE
+    EvaluateHealthResponse:
+      type: object
+      description: Health status of the evaluate service.
+      required:
+        - status
+      properties:
+        status:
+          $ref: '#/components/schemas/HealthStatus'
+        message:
+          type:
+            - string
+            - 'null'
+          description: Optional human-readable status message.
+        version:
+          type:
+            - string
+            - 'null'
+          description: Optional version of the evaluate service implementation.
     Message:
       type: object
       required:
@@ -1776,6 +1902,13 @@ components:
           description: Optional educational context (e.g., course material, task context).
           additionalProperties: true
           properties:
+            task:
+              description: Optional task grounding this conversation.
+              type:
+                - object
+                - 'null'
+              allOf:
+                - $ref: '#/components/schemas/Task'
             vendorExtensions:
               description: |
                 Optional vendor/platform-specific data namespaced under x-<platform-slug> keys. See VendorExtensions.yml for details.
@@ -1783,6 +1916,13 @@ components:
               properties:
                 x-lf:
                   $ref: '#/components/schemas/ChatContextXLf'
+        callbackUrl:
+          type:
+            - string
+            - 'null'
+          format: uri
+          description: |
+            Optional HTTPS callback URL for asynchronous processing. If provided, the service may return 202 Accepted immediately and deliver chat/reasoning results to this URL once processing is complete.
         configuration:
           type:
             - object
@@ -1836,6 +1976,10 @@ components:
           description: Optional metadata about response generation.
           additionalProperties: true
           properties:
+            vendorExtensions:
+              description: |
+                Optional vendor/platform-specific response data namespaced under x-<platform-slug> keys. See VendorExtensions.yml for details.
+              $ref: '#/components/schemas/VendorExtensions'
             summary:
               type:
                 - string
@@ -1892,12 +2036,24 @@ components:
             Optional list of µEd API versions supported by this service implementation (e.g., ["0.1.0"]). Clients can use this to select a compatible X-Api-Version.
           items:
             type: string
+    ChatInfoResponse:
+      type: object
+      description: Information and capabilities of the chat service.
+      required:
+        - capabilities
+      properties:
+        version:
+          type:
+            - string
+            - 'null'
+          description: Optional version of the chat service implementation.
+        capabilities:
+          $ref: '#/components/schemas/ChatCapabilities'
     ChatHealthResponse:
       type: object
-      description: Health status and capabilities of the chat service.
+      description: Health status of the chat service.
       required:
         - status
-        - capabilities
       properties:
         status:
           $ref: '#/components/schemas/HealthStatus'
@@ -1911,8 +2067,6 @@ components:
             - string
             - 'null'
           description: Optional version of the chat service implementation.
-        capabilities:
-          $ref: '#/components/schemas/ChatCapabilities'
     ChatContextXLf:
       type: object
       description: |
@@ -2406,6 +2560,30 @@ components:
                   requestedVersion: '0.0'
                   supportedVersions:
                     - 0.1.0
+    422-UnprocessableSubmission:
+      description: The request is valid, but the evaluation function cannot process the submission content (e.g. an unparseable expression).
+      headers:
+        X-Request-Id:
+          description: Request id for tracing this request across services.
+          schema:
+            type: string
+        X-Api-Version:
+          description: The API version that was used to serve this response.
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unprocessableSubmission:
+              summary: Example unprocessable submission error
+              value:
+                title: Unprocessable submission
+                message: 'Failed to parse SymPy expression: A/(w*'
+                code: VALIDATION_ERROR
+                trace: null
+                details: null
     500-InternalError:
       description: Internal server error.
       headers:
